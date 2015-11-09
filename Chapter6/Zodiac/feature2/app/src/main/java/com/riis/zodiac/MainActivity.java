@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         zodiac = new Zodiac();
         List<String> list = Arrays.asList(zodiac.getAllStarSign());
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         ListView listView = (ListView) findViewById(R.id.list_of_signs);
         listView.setAdapter(adapter);
     }
