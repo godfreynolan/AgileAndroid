@@ -1,4 +1,4 @@
-package com.riis.zodiac;
+package com.riis.horoscope;
 
 import android.app.Activity;
 import android.content.Intent;

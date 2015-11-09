@@ -1,17 +1,10 @@
 package com.riis.zodiac;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView mtxtSelectedItem;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
