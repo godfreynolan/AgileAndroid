@@ -2,8 +2,6 @@ package com.riis.horoscope;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,15 +9,13 @@ import org.mockito.Mockito;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Godfrey on 10/24/2015.
+ * @author Godfrey on 10/24/2015.
  */
 @SmallTest
 public class DailyZodiacTest {
