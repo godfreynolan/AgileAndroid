@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -48,50 +50,32 @@ public class ZodiacDetailActivity extends Activity  {
         month.setText(zodiac.getMonth());
 
         // TextView daily  = (TextView)findViewById(R.id.daily);
-        new AsyncTaskParseJson().execute();
+        new AsyncTaskParseJson(zodiac).execute();
 
 }
 
     public class AsyncTaskParseJson extends AsyncTask<String, String, String> {
+        String yourJsonStringUrl = "http://a.knrz.co/horoscope-api/current/";
+        String horoscope = "";
 
-        final String TAG = "AsyncTaskParseJson.java";
-
-        // TODO: pass as parameters
-        String yourJsonStringUrl = "http://ec2-54-158-151-82.compute-1.amazonaws.com/horoscope.php";
-        int yourSignNum = 0;
-
-        // contacts JSONArray
-        JSONArray dataJsonArr = null;
+        public AsyncTaskParseJson(Zodiac sign) {
+            yourJsonStringUrl += sign.getName().toLowerCase();
+        }
 
         @Override
         protected void onPreExecute() {}
 
         @Override
         protected String doInBackground(String... arg0) {
-
             try {
                 // instantiate our json parser
                 JsonParser jParser = new JsonParser();
 
                 // get json string from url
                 JSONObject json = jParser.getJSONFromUrl(yourJsonStringUrl);
-                dataJsonArr = json.getJSONArray("horoscopes");
-
-                // loop through all horoscopes
-                for (int i = 0; i < dataJsonArr.length(); i++) {
-                    JSONObject c = dataJsonArr.getJSONObject(i);
-                    String sign = c.getString("sign");
-                    String prediction = c.getString("prediction");
-
-                    if (i == yourSignNum) {
-                        this.publishProgress(prediction);
-                    }
-                    // show the values in our logcat
-                    Log.e(TAG, "sign: " + sign
-                            + ", prediction: " + prediction);
-                }
-
-            } catch (JSONException e) {
+                horoscope = json.getString("prediction");
+                horoscope = URLDecoder.decode(horoscope);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -99,17 +83,9 @@ public class ZodiacDetailActivity extends Activity  {
         }
 
         @Override
-        protected void onPostExecute(String strFromDoInBg) {}
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            //super.onProgressUpdate(values);
+        protected void onPostExecute(String strFromDoInBg) {
             TextView display = (TextView) findViewById(R.id.daily);
-            display.setText(values[0]);
+            display.setText(horoscope);
         }
     }
-
-
-
-
 }

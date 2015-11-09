@@ -5,6 +5,7 @@ import android.util.Log;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -17,25 +18,21 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 public class JsonParser {
-
 	final String TAG = "JsonParser.java";
-	
+
 	static InputStream is = null;
 	static JSONObject jObj = null;
 	static String json = "";
 
 	public JSONObject getJSONFromUrl(String url) {
-
 		// make HTTP request
 		try {
-
 			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpPost httpPost = new HttpPost(url);
+			HttpGet httpGet = new HttpGet(url);
 
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = httpClient.execute(httpGet);
 			HttpEntity httpEntity = httpResponse.getEntity();
-			is = httpEntity.getContent();			
-
+			is = httpEntity.getContent();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -45,7 +42,6 @@ public class JsonParser {
 		}
 		
 		try {
-			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
@@ -54,7 +50,6 @@ public class JsonParser {
 			}
 			is.close();
 			json = sb.toString();
-			
 		} catch (Exception e) {
 			Log.e(TAG, "Error converting result " + e.toString());
 		}

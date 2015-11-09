@@ -24,6 +24,4 @@ public class ZodiacUnitTest {
     public void aries_isRam() throws Exception {
         assertEquals(Zodiac.signs[ARIES_ID].getSymbol(), "Ram");
     }
-
-
 }
