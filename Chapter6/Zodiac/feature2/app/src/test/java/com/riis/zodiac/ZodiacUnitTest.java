@@ -1,6 +1,7 @@
 package com.riis.zodiac;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Build;
 import android.widget.ListView;
 
@@ -20,21 +21,21 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
 public class ZodiacUnitTest {
-    private Activity mainActivity;
+    private ListActivity mainActivity;
     private ListView lstView;
 
     @Before
     public void setUp() {
         mainActivity = Robolectric.setupActivity(MainActivity.class);
         assertNotNull("Main Activity not setup", mainActivity);
-        // what is the list view now?
-        lstView = (ListView) mainActivity.findViewById(R.layout.simple_list_item_1);
+        lstView = mainActivity.getListView();
     }
 
     @Test
     public void shouldDisplaySigns() throws Exception {
-        // TO DO: Fix now we're not using array list_of_signs
         assertThat("should be a dozen star signs", 12, equalTo(lstView.getCount()));
+        assertEquals("Aries", lstView.getAdapter().getItem(0));
+        assertEquals("Pisces", lstView.getAdapter().getItem(11));
     }
 
 }

@@ -20,7 +20,7 @@ public class MainActivity extends ListActivity {
 
         ListView listSigns = getListView();
         ArrayAdapter<Zodiac> listAdapter =
-                new ArrayAdapter<Zodiac>(this, android.R.layout.simple_list_item_1, Zodiac.signs);
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Zodiac.signs);
         listSigns.setAdapter(listAdapter);
     }
 
