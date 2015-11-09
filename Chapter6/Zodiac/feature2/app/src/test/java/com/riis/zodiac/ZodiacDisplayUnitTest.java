@@ -14,7 +14,6 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
@@ -32,14 +31,12 @@ public class ZodiacDisplayUnitTest {
 
     @Test
     public void ariesSymbolIsRam() throws Exception {
-        // TO DO: Use Robolectric to see if Aries Symbol is Ram
         TextView symbolTextView = (TextView) zodiacDetailActivity.findViewById(R.id.symbol);
         assertEquals("Ram", symbolTextView.getText().toString());
     }
 
     @Test
     public void ariesMonthIsApril() throws Exception {
-        // TO DO: Use Robolectric to see if Aries Month is April
         TextView monthTextView = (TextView) zodiacDetailActivity.findViewById(R.id.month);
         assertEquals("April", monthTextView.getText().toString());
     }
