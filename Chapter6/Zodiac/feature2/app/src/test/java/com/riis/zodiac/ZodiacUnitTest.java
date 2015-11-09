@@ -16,6 +16,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
+/**
+ * To work on unit tests, switch the Test Artifact in the Build Variants view.
+ *
+ * If the Robolectric test will not run, edit the test configuration by adding /$MODULE_NAME to the
+ * end of the Working Directory path.
+ */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml")
 public class ZodiacUnitTest {
