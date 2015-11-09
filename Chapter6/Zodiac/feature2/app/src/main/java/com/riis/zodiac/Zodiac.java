@@ -1,12 +1,10 @@
 package com.riis.zodiac;
 
-
 public class Zodiac {
     private String name;
     private String description;
     private String symbol;
     private String month;
-
 
     public static final Zodiac[] signs = {
             new Zodiac("Aries","Enterprising, Incisive, Spontaneous, Daring, Active, Courageous and Energetic, the Aries are the proverbial infants, guileless and optimistic to the fault.", "Ram", "April"),
