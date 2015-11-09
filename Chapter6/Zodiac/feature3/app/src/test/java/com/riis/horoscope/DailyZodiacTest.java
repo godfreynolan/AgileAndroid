@@ -2,6 +2,7 @@ package com.riis.horoscope;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.mockito.Mockito;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -48,8 +50,10 @@ public class DailyZodiacTest {
     }
 
     @Test
-    public void testCreateJsonObjectReturnsJsonObject() {
+    public void testCreateJsonObjectReturnsJsonObject() throws JSONException {
         JSONObject jsonObject = mJsonParser.createJsonObject(bufferedReader);
-        assertNotNull(jsonObject);
+        String horoscope = jsonObject.getString("prediction");
+
+        assertEquals("Test1", horoscope);
     }
 }
