@@ -6,7 +6,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,10 +19,6 @@ import java.io.UnsupportedEncodingException;
 public class JsonParser {
 	final String TAG = "JsonParser.java";
 
-	static InputStream is = null;
-	static JSONObject jObj = null;
-	static String json = "";
-
 	public JSONObject getJSONFromUrl(String url) {
 		// make HTTP request
 		try {
@@ -32,7 +27,13 @@ public class JsonParser {
 
 			HttpResponse httpResponse = httpClient.execute(httpGet);
 			HttpEntity httpEntity = httpResponse.getEntity();
-			is = httpEntity.getContent();
+			InputStream inputStream = httpEntity.getContent();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"), 8);
+
+            JSONObject jsonObject = createJsonObject(reader);
+            inputStream.close();
+
+            return jsonObject;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -40,39 +41,39 @@ public class JsonParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
-			StringBuilder sb = new StringBuilder();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				sb.append(line + "\n");
-			}
-			is.close();
-			json = sb.toString();
-		} catch (Exception e) {
-			Log.e(TAG, "Error converting result " + e.toString());
-		}
 
-		// try parse the string to a JSON object
-		try {
-			jObj = new JSONObject(json);
-		} catch (JSONException e) {
-			Log.e(TAG, "Error parsing data " + e.toString());
-		}
-
-		// return JSON String
-		return jObj;
+		return null;
 	}
 
-	public boolean isValidJSON(String horoscope){
+    protected JSONObject createJsonObject(BufferedReader reader) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            JSONObject jsonObject;
+            String line;
+            String json;
+
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+
+            json = sb.toString();
+            jsonObject = new JSONObject(json);
+
+            return jsonObject;
+        } catch (Exception e) {
+            Log.e(TAG, "Error converting result " + e.toString());
+        }
+
+        return null;
+    }
+
+    public boolean isValidJSON(String horoscope){
 		try {
-			jObj = new JSONObject(horoscope);
+			new JSONObject(horoscope);
 			return true;
 		} catch (JSONException e) {
-			Log.e(TAG, "Error parsing data " + e.toString());
+            e.printStackTrace();
 			return false;
 		}
 	}
-
 }

@@ -42,7 +42,7 @@ public class ZodiacDisplayUnitTest {
     }
 
     @Test
-    public void zodialMonthTest() throws Exception {
+    public void zodiacMonthTest() throws Exception {
         TextView monthTextView = (TextView) zodiacDetailActivity.findViewById(R.id.month);
         assertEquals(Zodiac.signs[ARIES_SIGN_INDEX].getMonth(), monthTextView.getText().toString());
     }
