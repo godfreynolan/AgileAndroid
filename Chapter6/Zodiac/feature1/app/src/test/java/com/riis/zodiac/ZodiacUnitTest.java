@@ -37,7 +37,6 @@ public class ZodiacUnitTest {
     @Test
     public void shouldDisplaySigns() throws Exception {
         assertThat("should be a dozen star signs", 12, equalTo(lstView.getCount()));
-        // TODO: add test to find Aries and Pisces
         assertEquals("Aries", lstView.getAdapter().getItem(0));
         assertEquals("Pisces", lstView.getAdapter().getItem(11));
     }
