@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">CalculatorAdd</string>
-    <string name="type_operand_one_hint">Type Operand 1</string>
-    <string name="type_operant_two_hint">Type Operand 2</string>
-    <string name="add_operation_text">Add</string>
-    <string name="computationError">Error</string>
-</resources>

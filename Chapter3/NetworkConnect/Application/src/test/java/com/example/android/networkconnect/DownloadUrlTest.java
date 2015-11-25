@@ -13,15 +13,15 @@ import static org.hamcrest.CoreMatchers.containsString;
 import java.io.IOException;
 
 
+@RunWith(MockitoJUnitRunner.class)
 public class DownloadUrlTest {
 
-    DownloadUrl tDownloadUrl;
-    String htmlStr;
+    public DownloadUrl tDownloadUrl = Mockito.mock(DownloadUrl.class);
 
     @Before
     public void setUp() {
         try {
-            htmlStr = tDownloadUrl.loadFromNetwork("http://www.google.com");
+            Mockito.when(tDownloadUrl.loadFromNetwork("http://www.google.com")).thenReturn("<!doctype html><html itemscope=\"\" itemtype=\"http://schema.org/WebPage\" lang=\"en\"><head>");
         } catch (IOException e) {
             // network error
         }
@@ -29,6 +29,11 @@ public class DownloadUrlTest {
 
     @Test
     public void downloadUrlTest_ReturnsTrue() {
-            assertThat(htmlStr,containsString("doctype"));
+        try {
+            assertThat(tDownloadUrl.loadFromNetwork("http://www.google.com"),containsString("doctype"));
+        } catch (IOException e) {
+            //
+        }
     }
 }
+

@@ -1,4 +1,4 @@
-# Kata Shared Preferences
+# Shared Preferences
 
 Simple login screen displays entered username, password and email used to login
 
